@@ -10,7 +10,7 @@ function Slide1() {
                     alt="Slide 1" 
                     width={800} 
                     height={600} 
-                    className="max-w-full h-auto w-[80%] border-2 border-black rounded" 
+                    className="max-w-full border-2 border-black rounded" 
                 />
             </div>
             <div className="w-[80%] mt-5 text-left text-gray-800">

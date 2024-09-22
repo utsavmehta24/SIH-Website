@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image'; // Import Next.js Image component
+import Image from 'next/image';
 
 const Header = () => {
     return (
@@ -9,8 +9,9 @@ const Header = () => {
                 <Image 
                     src="https://engg.dypvp.edu.in/images/logoDpu1.png" 
                     alt="Company Logo" 
-                    width={100} // Set the width
-                    height={48} // Set the height
+                    width={200}
+                    height={200}
+                    className="h-12 w-auto"
                 />
             </div>
 

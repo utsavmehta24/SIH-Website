@@ -17,7 +17,7 @@ const Footer = () => {
                     <div className="w-full bg-gray-100 rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row border border-gray-800">
                         <div className="w-full md:w-2/5 h-80">
                             {/* Replacing <img> with <Image /> */}
-                            <Image 
+                            <Image
                                 className="object-center object-cover w-full h-full"
                                 src="https://media.licdn.com/dms/image/v2/D5603AQFROfH5oc35Wg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1725718450273?e=1732752000&v=beta&t=mqSzQYd8HLsNcLNtkPVHEG_zdS2bGIKHzkGP06xzfNc" 
                                 alt="photo" 

@@ -8,9 +8,9 @@ const IntroSlide = () => {
         <Image 
           src="/IntroSlide.jpg" 
           alt="Slide 1" 
-          width={800} 
-          height={600} 
-          className="h-[80%] border-2 border-black w-[50%] rounded"
+          width={900} 
+          height={900} 
+          className=" border-2 border-black  rounded"
         />
       </div>
       <div className="w-[80%] mt-5 text-left text-gray-800">
