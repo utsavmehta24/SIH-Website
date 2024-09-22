@@ -1,10 +1,17 @@
 import React from 'react';
+import Image from 'next/image';
 
 const Slide2 = () => {
     return (
         <div className="flex flex-col items-center justify-start h-[70vh] bg-white pt-12">
             <div className="w-[65%] flex justify-center items-center">
-                <img src='./TechincalApproach.jpg' alt="Slide 2" className="max-w-full h-auto border-2 border-black" />
+                <Image 
+                    src="/TechincalApproach.jpg" 
+                    alt="Slide 2" 
+                    width={800} 
+                    height={600} 
+                    className="max-w-full h-auto border-2 border-black" 
+                />
             </div>
             <div className="w-[80%] mt-5 text-left text-gray-800">
                 <h1 className="text-2xl mb-2">Frontend Interface Design & User Interaction</h1>

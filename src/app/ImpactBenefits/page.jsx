@@ -1,10 +1,17 @@
 import React from 'react';
+import Image from 'next/image'; // Import the Next.js Image component
 
 const Slide3 = () => {
     return (
         <div className="flex flex-col items-center justify-start h-[70vh] bg-white pt-12">
             <div className="w-[65%] flex justify-center items-center">
-                <img src="./ImpactBenefits.jpg" alt="Slide 3" className="max-w-full h-auto border-2 border-black" />
+                <Image 
+                    src="/ImpactBenefits.jpg" // Adjust the path if necessary (must be in the "public" directory)
+                    alt="Slide 3" 
+                    width={800}  // Specify width
+                    height={600} // Specify height
+                    className="max-w-full h-auto border-2 border-black"
+                />
             </div>
             <div className="w-[80%] mt-5 text-left text-gray-800 flex flex-col space-y-10">
                 <div className="impact">

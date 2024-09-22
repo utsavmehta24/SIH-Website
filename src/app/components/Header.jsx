@@ -1,14 +1,16 @@
 import React from 'react';
+import Image from 'next/image'; // Import Next.js Image component
 
 const Header = () => {
     return (
         <header className="w-full bg-white flex items-center justify-between p-4 shadow-md">
             {/* Company Logo */}
             <div className="flex-shrink-0 w-1/3">
-                <img 
+                <Image 
                     src="https://engg.dypvp.edu.in/images/logoDpu1.png" 
                     alt="Company Logo" 
-                    className="h-12 w-auto"
+                    width={100} // Set the width
+                    height={48} // Set the height
                 />
             </div>
 

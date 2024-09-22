@@ -1,10 +1,17 @@
 import React from 'react';
+import Image from 'next/image';
 
 function Slide1() {
     return (
-        <div className="flex flex-col items-center justify-start  bg-white pt-12">
-            <div className=" flex justify-center items-center">
-                <img src='./IntroAndUserFlow.jpg' alt="Slide 1" className="max-w-full h-auto w-[80%] border-2 border-black rounded" />
+        <div className="flex flex-col items-center justify-start bg-white pt-12">
+            <div className="flex justify-center items-center">
+                <Image 
+                    src="/IntroAndUserFlow.jpg" 
+                    alt="Slide 1" 
+                    width={800} 
+                    height={600} 
+                    className="max-w-full h-auto w-[80%] border-2 border-black rounded" 
+                />
             </div>
             <div className="w-[80%] mt-5 text-left text-gray-800">
                 <h1 className="text-2xl mb-2">Introduction</h1>
