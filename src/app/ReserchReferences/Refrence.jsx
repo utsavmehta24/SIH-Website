@@ -1,64 +1,9 @@
-// import React from 'react';
-// import Image from 'next/image';
-
-// const IntroSlide = () => {
-//   return (
-//     <div className="flex flex-col items-center justify-start bg-white pt-12">
-//       <div className="flex justify-center items-center">
-//         <Image 
-//           src="/IntroSlide.jpg" 
-//           alt="Slide 1" 
-//           width={900} 
-//           height={900} 
-//           className=" border-2 border-black  rounded"
-//         />
-//       </div>
-//       <div className="w-[80%] mt-5 text-left text-gray-800">
-//         <h1 className="text-2xl mb-2">Introduction</h1>
-//         <p>
-//           The traditional bail process is often time-consuming and inefficient. Our innovative solution,
-//           the Bail Reckoner, is designed to address these challenges by providing customized interfaces
-//           for different stakeholders: police, undertrial prisoners, judicial aid providers, and judicial authorities.
-//         </p>
-
-//         <h2 className="text-xl mt-5 text-gray-700">Features of the Bail Reckoner</h2>
-
-//         <h3 className="text-lg mt-4 text-gray-600">Customized Interfaces</h3>
-//         <ul className="list-disc pl-5">
-//           <li><strong>Police:</strong> Simplifies the processing of bail applications.</li>
-//           <li><strong>Undertrial Prisoners:</strong> Provides easy access to bail eligibility and application procedures.</li>
-//           <li><strong>Judicial Aid Providers:</strong> Facilitates accurate preparation and submission of bail applications.</li>
-//           <li><strong>Judicial Authorities:</strong> Streamlines the evaluation process for quicker decisions.</li>
-//         </ul>
-
-//         <h3 className="text-lg mt-4 text-gray-600">Efficiency Improvements</h3>
-//         <p>
-//           <strong>Administrative Tasks:</strong> Automates and manages documents, reducing workload for judiciary and legal professionals.<br />
-//           <strong>Communication:</strong> Enhances document handling and communication between stakeholders, improving overall efficiency.
-//         </p>
-
-//         <h3 className="text-lg mt-4 text-gray-600">Legal Aid Provider Services</h3>
-//         <p>
-//           <strong>Charged Services:</strong> Providers can access references and customized applications based on case requirements.
-//         </p>
-
-//         <h3 className="text-lg mt-4 text-gray-600">Citizen Access</h3>
-//         <p>
-//           <strong>Community Access:</strong> Citizens can connect with legal aid providers for a fee, gaining access to professional assistance.
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default IntroSlide;
-
 "use client";
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Mammoth from 'mammoth';
 
-function IntroSlide() {
+function refrence() {
     const [content, setContent] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
@@ -69,9 +14,9 @@ function IntroSlide() {
         const fetchFile = async () => {
             try {
                 // Fetch the Word file from the public folder
-                const response = await fetch('/Slide_1.docx');  // Adjust the file path as necessary
+                const response = await fetch('/Slide_3.docx');  // Adjust the file path as necessary
                 const arrayBuffer = await response.arrayBuffer();  // Convert the response to array buffer
-
+                
                 // Options to retain hyperlinks
                 const options = {
                     convertImage: Mammoth.images.imgElement((image) => {
@@ -125,15 +70,20 @@ function IntroSlide() {
         <div className="flex flex-col items-center justify-start bg-white pt-12">
             <div className="flex justify-center items-center">
                 <Image
-                    src="/IntroSlide.jpg" // Adjust the path if necessary (must be in the "public" directory)
-                    alt="Intro Slide"
-                    width={900}  // Specify width
-                    height={900} // Specify height
-                    className="border-2 border-black rounded"
+                    src="/ReserchReferences.jpg"  // Adjusted image path
+                    alt="Slide 2"
+                    width={800}
+                    height={600}
+                    className="max-w-full border-2 border-black rounded"
                 />
             </div>
             {/* Increase font size for the entire content area */}
             <div className="w-[80%] mt-5 text-left text-gray-800 text-lg">
+                <h1 className="text-3xl mb-2">Research References</h1>
+                <p>
+                    This section includes key research references used to develop the system and its impact on the traditional bail process. It highlights studies on judicial delays, prison overcrowding, and technological solutions that improve legal proceedings and support for undertrial prisoners.
+                </p>
+
                 {/* Render the current content chunk and apply font size to the dynamically loaded content */}
                 {content.slice(0, currentIndex + 1).map((chunk, idx) => (
                     <div key={idx} dangerouslySetInnerHTML={{ __html: chunk }} style={{ fontSize: '18px' }} />
@@ -151,5 +101,4 @@ function IntroSlide() {
     );
 }
 
-export default IntroSlide;
-
+export default refrence;

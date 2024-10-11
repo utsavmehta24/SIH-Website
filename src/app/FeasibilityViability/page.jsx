@@ -1,45 +1,136 @@
-import React from 'react';
-import Image from 'next/image'; // Import the Next.js Image component
+// // import React from 'react';
+// import Image from 'next/image'; // Import the Next.js Image component
 
-const Slide3 = () => {
+// const Slide3 = () => {
+//     return (
+//         <div className="flex flex-col items-center justify-start h-[70vh] bg-white pt-12">
+//             <div className="w-[65%] flex justify-center items-center">
+//          
+//             </div>
+//             <div className="w-[80%] mt-5 text-left text-gray-800 flex flex-col space-y-10">
+//                 <div className="impact">
+//                     <h1 className="text-2xl mb-2">Impact</h1>
+//                     <h2 className="text-xl mt-5">Streamlining the process and minimizing waiting times:</h2>
+//                     <p>The system helps speed up the bail application process, reducing the time spent waiting for approvals.</p>
+//                     <h2 className="text-xl mt-5">Recommendation as per nature of offense & related previous case:</h2>
+//                     <p>The system can provide recommendations based on the type of offense and prior similar cases, aiding judicial decisions.</p>
+//                     <h2 className="text-xl mt-5">Simplifying application preparation and submission:</h2>
+//                     <p>It streamlines the preparation and submission of bail applications, making the process more efficient and user-friendly.</p>
+//                     <h2 className="text-xl mt-5">Streamlines workflow with real-time data access:</h2>
+//                     <p>The system offers real-time access to legal data, ensuring smoother workflow across the judicial process.</p>
+//                     <h2 className="text-xl mt-5">Make faster in decision-making:</h2>
+//                     <p>Faster decision-making is possible through improved data access and automation, reducing human error and delays.</p>
+//                 </div>
+//                 <div className="benefits">
+//                     <h1 className="text-2xl mb-2">Benefits</h1>
+//                     <h2 className="text-xl mt-5">Saves time for legal aid providers, judicial authorities, and undertrial prisoners:</h2>
+//                     <p>By automating the process, the system saves time for key stakeholders, including legal aid providers, judges, and prisoners awaiting bail.</p>
+//                     <h2 className="text-xl mt-5">Cuts down on paper waste by digitizing the bail process:</h2>
+//                     <p>The system digitizes the bail application process, reducing the need for physical paperwork, thus being more eco-friendly.</p>
+//                     <h2 className="text-xl mt-5">Fairness and transparency in the bail process due to access to legal information:</h2>
+//                     <p>The system provides easy access to critical legal information, promoting fairness and transparency in the bail process.</p>
+//                     <h2 className="text-xl mt-5">Implements encryption and secure cloud storage, protecting sensitive legal data:</h2>
+//                     <p>Sensitive legal data is protected through encryption and secure cloud storage, ensuring compliance with security standards and protecting personal information.</p>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default Slide3;
+"use client";
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Mammoth from 'mammoth';
+
+function Slide3() {
+    const [content, setContent] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const chunkSize = 1500;
+
+    useEffect(() => {
+        const fetchFile = async () => {
+            try {
+                // Fetch the Word file from the public folder
+                const response = await fetch('/Slide_4.docx');  // Adjust the file path as necessary
+                const arrayBuffer = await response.arrayBuffer();  // Convert the response to array buffer
+
+                // Options to retain hyperlinks
+                const options = {
+                    convertImage: Mammoth.images.imgElement((image) => {
+                        return image.read("base64").then(function (imageBuffer) {
+                            return { src: "data:" + image.contentType + ";base64," + imageBuffer };
+                        });
+                    }),
+                    styleMap: [
+                        "p[style-name='Heading 1'] => h1:fresh",
+                        "p[style-name='Heading 2'] => h2:fresh",
+                        "p[style-name='Hyperlink'] => a"
+                    ],
+                    includeDefaultStyleMap: true
+                };
+
+                const result = await Mammoth.convertToHtml({ arrayBuffer }, options);  // Convert to HTML
+
+                // Split the content into chunks
+                const contentChunks = [];
+                for (let i = 0; i < result.value.length; i += chunkSize) {
+                    contentChunks.push(result.value.slice(i, i + chunkSize));
+                }
+
+                setContent(contentChunks);  // Set the content chunks
+                setIsLoading(false);  // Stop loading
+            } catch (error) {
+                console.error('Error fetching Word file:', error);
+            }
+        };
+
+        fetchFile();  // Call the function when the component mounts
+    }, []);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            const [entry] = entries;
+            if (entry.isIntersecting && currentIndex < content.length) {
+                setCurrentIndex((prevIndex) => prevIndex + 1);  // Load the next chunk
+            }
+        });
+
+        const sentinel = document.getElementById('sentinel');
+        if (sentinel) observer.observe(sentinel);
+
+        return () => {
+            if (sentinel) observer.unobserve(sentinel);
+        };
+    }, [content, currentIndex]);
+
     return (
-        <div className="flex flex-col items-center justify-start h-[70vh] bg-white pt-12">
-            <div className="w-[65%] flex justify-center items-center">
-                <Image 
-                    src='/FeasibilityViability.jpg' // Adjust the path if necessary (must be in the "public" directory)
-                    alt="Slide 3" 
+        <div className="flex flex-col items-center justify-start bg-white pt-12">
+            <div className="flex justify-center items-center">
+                <Image
+                    src="/FeasibilityViability.jpg" // Adjust the path if necessary (must be in the "public" directory)
+                    alt="Slide 3"
                     width={800}  // Specify width
                     height={600} // Specify height
                     className="max-w-full h-auto border-2 border-black"
                 />
             </div>
-            <div className="w-[80%] mt-5 text-left text-gray-800">
-                <h1 className="text-2xl mb-2">Streamlined Bail Processing</h1>
-                <h2 className="text-xl mt-5">Problem Addressed:</h2>
-                <p>Indian courts handle thousands of bail applications daily.</p>
-                <h2 className="text-xl mt-5">Proposed Solution:</h2>
-                <p>The &quot;Bail Rocker&quot; system is designed to automate and expedite the bail application process.</p>
-                
-                <h2 className="text-xl mt-5">System Integration:</h2>
-                <ul className="list-disc pl-5">
-                    <li><strong>CourtListener:</strong> Offers free legal opinions and research materials.</li>
-                    <li><strong>LIMBS (Legal Information Management &amp; Briefing System):</strong> Provides real-time access to the Indian judiciary&apos;s case data.</li>
-                    <li><strong>ICJS (Interoperable Criminal Justice System):</strong> Facilitates seamless data transfer between police, courts, jails, and forensic institutions.</li>
-                    <li><strong>E-Court:</strong> Digital court management for easier access to legal documents and case status.</li>
-                </ul>
+            {/* Increase font size for the entire content area */}
+            <div className="w-[80%] mt-5 text-left text-gray-800 text-lg">
+                {/* Render the current content chunk and apply font size to the dynamically loaded content */}
+                {content.slice(0, currentIndex + 1).map((chunk, idx) => (
+                    <div key={idx} dangerouslySetInnerHTML={{ __html: chunk }} style={{ fontSize: '18px' }} />
+                ))}
 
-                <h1 className="text-2xl mt-5 mb-2">Scalable and Adaptive</h1>
-                <p>The Indian judiciary handles a large caseload. A cloud-based infrastructure allows the system to scale efficiently, growing as needed.</p>
-                <p><strong>Future Reforms:</strong> The system is designed to accommodate future legal reforms, making it adaptive.</p>
+                {/* Sentinel element for observing when to load more */}
+                {currentIndex < content.length - 1 && (
+                    <div id="sentinel" style={{ height: '30px', backgroundColor: 'transparent' }}></div>
+                )}
 
-                <h1 className="text-2xl mt-5 mb-2">Legal Framework Compliance</h1>
-                <p>The system is designed to comply with Indian judicial regulations, ensuring secure handling of sensitive data using encryption and tokenization.</p>
-                <p><strong>Cloud Infrastructure:</strong> Uses secure platforms like Google Cloud and implements security protocols like HTTPS and SSH, which are in line with India&apos;s legal data security standards.</p>
-
-                <h1 className="text-2xl mt-5 mb-2">Cost Efficiency &amp; Access to Justice</h1>
-                <p>The system enhances access to justice for underprivileged sections of society by streamlining the bail process.</p>
-                <p><strong>Remote Case Handling:</strong> It aids rural areas with limited access to physical courts, facilitating more transparent bail processes.</p>
-                <p><strong>Automation Benefits:</strong> Automating routine tasks like tracking bail applications can reduce errors, improve the efficiency of judicial processes, and minimize manpower costs.</p>
+                {/* Show loading indicator */}
+                {isLoading && <p>Loading...</p>}
             </div>
         </div>
     );
