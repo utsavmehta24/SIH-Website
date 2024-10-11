@@ -1,55 +1,84 @@
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Mammoth from 'mammoth';
 
-const Slide2 = () => {
+function Slide2() {
+    const [content, setContent] = useState([]);  // Store chunks of content
+    const [currentIndex, setCurrentIndex] = useState(0);  // Track the current chunk
+    const [isLoading, setIsLoading] = useState(true);  // Loading state for content
+
+    const chunkSize = 1500;  // Define chunk size for content splitting
+
+    useEffect(() => {
+        const fetchFile = async () => {
+            try {
+                // Fetch the Word file from the public folder
+                const response = await fetch('/Slide_6.docx');  // Adjust the file path as necessary
+                const arrayBuffer = await response.arrayBuffer();  // Convert to array buffer
+                const result = await Mammoth.convertToHtml({ arrayBuffer });  // Convert to HTML
+
+                // Split the content into chunks
+                const contentChunks = [];
+                for (let i = 0; i < result.value.length; i += chunkSize) {
+                    contentChunks.push(result.value.slice(i, i + chunkSize));
+                }
+
+                setContent(contentChunks);  // Set the content chunks
+                setIsLoading(false);  // Stop loading
+            } catch (error) {
+                console.error('Error fetching Word file:', error);
+            }
+        };
+
+        fetchFile();  // Call the function when the component mounts
+    }, []);
+
+    // Intersection Observer to load content as user scrolls
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            const [entry] = entries;
+            if (entry.isIntersecting && currentIndex < content.length) {
+                setCurrentIndex((prevIndex) => prevIndex + 1);  // Load the next chunk
+            }
+        });
+
+        const sentinel = document.getElementById('sentinel');
+        if (sentinel) observer.observe(sentinel);
+
+        return () => {
+            if (sentinel) observer.unobserve(sentinel);
+        };
+    }, [content, currentIndex]);
+
     return (
-        <div className="flex flex-col items-center justify-start h-[70vh] bg-white pt-12">
+        <div className="flex flex-col items-center justify-start bg-white pt-12">
             <div className="w-[65%] flex justify-center items-center">
-                <Image 
-                    src="/TechincalApproach.jpg" 
-                    alt="Slide 2" 
-                    width={800} 
-                    height={600} 
-                    className="max-w-full h-auto border-2 border-black" 
+                <Image
+                    src="/TechincalApproach.jpg"
+                    alt="Slide 2"
+                    width={800}
+                    height={600}
+                    className="max-w-full h-auto border-2 border-black"
                 />
             </div>
-            <div className="w-[80%] mt-5 text-left text-gray-800">
-                <h1 className="text-2xl mb-2">Frontend Interface Design & User Interaction</h1>
-                <h2 className="text-xl mt-5">Technologies Used:</h2>
-                <ul className="list-disc pl-5">
-                    <li><strong>ReactJS & NextJS:</strong> Used for dynamic routing, ensuring fast, intuitive, and responsive applications. ReactJS provides a smooth UI, while NextJS supports server-side rendering for better performance and SEO.</li>
-                    <li><strong>Figma:</strong> Used for creating user-centric dashboards, facilitating collaboration among designers and developers to ensure an intuitive interface.</li>
-                </ul>
-                <p><strong>Example:</strong> A dynamic interface allows easy navigation through bail application steps with seamless transitions between pages.</p>
 
-                <h1 className="text-2xl mt-5 mb-2">Backend Process & Data Management</h1>
-                <h2 className="text-xl mt-5">Technologies Used:</h2>
-                <ul className="list-disc pl-5">
-                    <li><strong>Django, FastAPI, Flask:</strong> Handle backend logic like processing bail requests, fetching data from external databases, and managing authentication and sessions.</li>
-                    <li><strong>Workflow Optimization:</strong> Designed to process requests efficiently, reducing bail application review and processing time.</li>
-                </ul>
-                <p><strong>Example:</strong> When a bail application is submitted, the backend handles the request, communicates with external databases, and ensures an efficient workflow.</p>
+            {/* Increase font size for the entire content area */}
+            <div className="w-[80%] mt-5 text-left text-gray-800 text-lg">
+                <h1 className="text-3xl mb-2">Frontend Interface Design & User Interaction</h1>
 
-                <h1 className="text-2xl mt-5 mb-2">Data Flow & API Integration</h1>
-                <h2 className="text-xl mt-5">External System Communication:</h2>
-                <ul className="list-disc pl-5">
-                    <li><strong>Data Repository:</strong> MongoDB/MySQL is used to store, retrieve, and update bail data, including case details and court proceedings.</li>
-                </ul>
-                <p><strong>Example:</strong> Updates in the E-Court system are retrieved in real-time and reflected in the user interface.</p>
+                {/* Render the current content chunk and apply font size to the dynamically loaded content */}
+                {content.slice(0, currentIndex + 1).map((chunk, idx) => (
+                    <div key={idx} dangerouslySetInnerHTML={{ __html: chunk }} style={{ fontSize: '18px' }} />
+                ))}
 
-                <h1 className="text-2xl mt-5 mb-2">Security Protocols</h1>
-                <ul className="list-disc pl-5">
-                    <li><strong>End-to-End Encryption & Tokenization:</strong> Ensures data is encrypted during transmission and storage to prevent unauthorized access.</li>
-                    <li><strong>HTTPS (TLS/SSL) & Secure Shell:</strong> Protects data integrity and security during exchanges between users and servers.</li>
-                </ul>
-                <p><strong>Example:</strong> Legal professionals access case information securely to ensure privacy and confidentiality.</p>
+                {/* Sentinel element for observing when to load more */}
+                {currentIndex < content.length - 1 && (
+                    <div id="sentinel" style={{ height: '30px', backgroundColor: 'transparent' }}></div>
+                )}
 
-                <h1 className="text-2xl mt-5 mb-2">Cloud and Machine Learning Integration</h1>
-                <ul className="list-disc pl-5">
-                    <li><strong>Google Cloud Storage:</strong> Provides scalability, reliability, and uptime for handling large amounts of data.</li>
-                    <li><strong>Machine Learning (PyTorch & TensorFlow):</strong> Used for predictive analytics to assess bail conditions and predict outcomes based on historical data.</li>
-                </ul>
-                <p><strong>Example:</strong> Analyzing historical bail decisions to suggest conditions or outcomes to judges.</p>
+                {/* Show loading indicator */}
+                {isLoading && <p>Loading...</p>}
             </div>
         </div>
     );
