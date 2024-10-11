@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Mammoth from 'mammoth';
+import * as Mammoth from 'mammoth'; // Correct the import for Mammoth
 
-function refrence() {
+function Reference() {  // Capitalize the component name
     const [content, setContent] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
@@ -13,11 +13,9 @@ function refrence() {
     useEffect(() => {
         const fetchFile = async () => {
             try {
-                // Fetch the Word file from the public folder
                 const response = await fetch('/Slide_3.docx');  // Adjust the file path as necessary
-                const arrayBuffer = await response.arrayBuffer();  // Convert the response to array buffer
+                const arrayBuffer = await response.arrayBuffer(); 
                 
-                // Options to retain hyperlinks
                 const options = {
                     convertImage: Mammoth.images.imgElement((image) => {
                         return image.read("base64").then(function (imageBuffer) {
@@ -32,29 +30,28 @@ function refrence() {
                     includeDefaultStyleMap: true
                 };
 
-                const result = await Mammoth.convertToHtml({ arrayBuffer }, options);  // Convert to HTML
+                const result = await Mammoth.convertToHtml({ arrayBuffer }, options);
 
-                // Split the content into chunks
                 const contentChunks = [];
                 for (let i = 0; i < result.value.length; i += chunkSize) {
                     contentChunks.push(result.value.slice(i, i + chunkSize));
                 }
 
-                setContent(contentChunks);  // Set the content chunks
-                setIsLoading(false);  // Stop loading
+                setContent(contentChunks);
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching Word file:', error);
             }
         };
 
-        fetchFile();  // Call the function when the component mounts
+        fetchFile(); 
     }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             const [entry] = entries;
             if (entry.isIntersecting && currentIndex < content.length) {
-                setCurrentIndex((prevIndex) => prevIndex + 1);  // Load the next chunk
+                setCurrentIndex((prevIndex) => prevIndex + 1); 
             }
         });
 
@@ -77,7 +74,6 @@ function refrence() {
                     className="max-w-full border-2 border-black rounded"
                 />
             </div>
-            {/* Increase font size for the entire content area */}
             <div className="w-[80%] mt-5 text-left text-gray-800 text-lg">
                 <h1 className="text-3xl mb-2">Research References</h1>
                 <p>
@@ -94,11 +90,10 @@ function refrence() {
                     <div id="sentinel" style={{ height: '30px', backgroundColor: 'transparent' }}></div>
                 )}
 
-                {/* Show loading indicator */}
                 {isLoading && <p>Loading...</p>}
             </div>
         </div>
     );
 }
 
-export default refrence;
+export default Reference;
