@@ -97,4 +97,3 @@ function IntroSlide() {
 }
 
 export default IntroSlide;
-

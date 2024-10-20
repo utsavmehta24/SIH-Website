@@ -17,7 +17,7 @@ const MainPage = () => {
                                 <p className="text-xl text-gray-800 font-bold">Introductory Slide and User Flow</p>
                                 <p className="text-base text-black font-normal">Problem & Solution</p>
                                 <p className="text-base leading-relaxed text-black font-normal">
-                                    Write a brief about the problem in about 50 words.
+                                    EquaTech Innovators' introduction page highlights their mission to develop tech solutions addressing societal issues. The platform fosters innovation by combining technology with real-world applications. Their expertise spans AI, finance, web development, and more, contributing to creating a more equitable society through their projects. The team focuses on problem-solving and forward-thinking approaches.
                                 </p>
                                 <Image
                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQzJwEWX_dApGOwOmyzlDXKt6iw7utAb3FSg&s="
@@ -43,7 +43,7 @@ const MainPage = () => {
                                 <p className="text-xl text-gray-800 font-bold">User Flow</p>
                                 <p className="text-base text-black font-normal">Problem & Solution</p>
                                 <p className="text-base leading-relaxed text-black font-normal">
-                                    Write a brief about the problem in about 50 words.
+                                    The Solution User Flow page outlines challenges in the traditional bail process, such as inefficiencies, delays, and complexities faced by undertrial prisoners, judicial authorities, and police. It explains how these issues contribute to case backlogs and prison overcrowding, while highlighting the need for a more streamlined, technology-driven system to improve coordination and reduce delays.
                                 </p>
                                 <Image
                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQzJwEWX_dApGOwOmyzlDXKt6iw7utAb3FSg&s="
@@ -69,7 +69,7 @@ const MainPage = () => {
                                 <p className="text-xl text-gray-800 font-bold">Technical Approach</p>
                                 <p className="text-base text-black font-normal">Problem & Solution</p>
                                 <p className="text-base leading-relaxed text-black font-normal">
-                                    Write a brief about the problem in about 50 words.
+                                    The Technical Approach page explains the technological framework behind EquaTech's solution, focusing on frontend design for user interaction and backend processes to streamline operations. It emphasizes building a seamless interface while incorporating security measures and ensuring scalability. The approach aims to enhance efficiency in the bail process by automating tasks and improving data flow across all stakeholders.
                                 </p>
                                 <Image
                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQzJwEWX_dApGOwOmyzlDXKt6iw7utAb3FSg&s="
@@ -95,7 +95,7 @@ const MainPage = () => {
                                 <p className="text-xl text-gray-800 font-bold">Feasiblity and Viability</p>
                                 <p className="text-base text-black font-normal">Problem & Solution</p>
                                 <p className="text-base leading-relaxed text-black font-normal">
-                                    Write a brief about the problem in about 50 words.
+                                    The Feasibility and Viability page explores the practical implementation of EquaTech's solution, examining its potential impact on the judicial system. It assesses both technical and economic feasibility, emphasizing the efficiency and scalability of the model. The analysis demonstrates how their innovative approach can address real-world challenges while ensuring long-term sustainability and benefits for all stakeholders.
                                 </p>
                                 <Image
                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQzJwEWX_dApGOwOmyzlDXKt6iw7utAb3FSg&s="
@@ -121,7 +121,7 @@ const MainPage = () => {
                                 <p className="text-xl text-gray-800 font-bold">Impact And Benefits</p>
                                 <p className="text-base text-black font-normal">Problem & Solution</p>
                                 <p className="text-base leading-relaxed text-black font-normal">
-                                    Write a brief about the problem in about 50 words.
+                                    The Impact and Benefits page outlines how EquaTech’s solution will improve the bail process by enhancing coordination between judicial authorities and police, reducing delays, and easing case backlogs. The platform's efficiency-driven approach aims to reduce prison overcrowding, provide quicker justice, and ultimately create a more equitable judicial system through streamlined technology.
                                 </p>
                                 <Image
                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQzJwEWX_dApGOwOmyzlDXKt6iw7utAb3FSg&s="
@@ -147,7 +147,7 @@ const MainPage = () => {
                                 <p className="text-xl text-gray-800 font-bold">Reserch and References</p>
                                 <p className="text-base text-black font-normal">Problem & Solution</p>
                                 <p className="text-base leading-relaxed text-black font-normal">
-                                    Write a brief about the problem in about 50 words.
+                                    The Research References page lists key studies and resources used to inform the development of EquaTech's solution. These references focus on judicial inefficiencies, prison overcrowding, and how technological interventions can streamline legal processes. It underscores the importance of data-driven research in building effective, scalable solutions that address critical issues within the criminal justice system.
                                 </p>
                                 <Image
                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQzJwEWX_dApGOwOmyzlDXKt6iw7utAb3FSg&s="
